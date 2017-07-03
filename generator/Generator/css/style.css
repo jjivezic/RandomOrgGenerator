@@ -1,0 +1,37 @@
+body {
+    background: #e3e1e1;
+}
+.container {
+    margin-top: 30px;
+}
+.container > h3 {
+    color: teal;
+      text-transform: uppercase;
+}
+.form-container {
+    width: 70%;
+    background: #e8e8e8;
+    padding: 10px;
+    border: 1px solid white;
+}
+.form-container p {
+    color: black;
+    padding-bottom: 10px;
+    border-bottom: 1px solid white;
+}
+
+#post-btn,#reset {
+    background: teal;
+    color: white;
+    text-transform: uppercase;
+    border: 1px solid #0a7373;
+    box-shadow: 1px 1px 4px 1px #9c9c9c;
+}
+.form-container label{
+        font-weight: lighter;
+    text-transform: uppercase;
+    color: #717171;
+}
+#reset{
+    display: none
+}
