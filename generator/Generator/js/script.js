@@ -6,7 +6,6 @@ $(document).ready(function () {
         var howMuch = $('input[name="howMuch"]').val();
         var max = $('input[name="max"]').val();
         var min = $('input[name="min"]').val();
-
         var data = {
             jsonrpc: '2.0',
             method: 'generateIntegers',
@@ -20,7 +19,7 @@ $(document).ready(function () {
             },
             id: 2601
         };
-        if (max > min) {
+        if ( parseInt(max) > parseInt(min)) {
             $.ajax({
                     url: 'https://api.random.org/json-rpc/1/invoke',
                     type: "POST",
@@ -44,7 +43,7 @@ $(document).ready(function () {
             resetGenerator();
         } else {
             alert("The max number should be biger then min number.");
-  
+
         }
 
     });
