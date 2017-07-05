@@ -19,7 +19,7 @@ $(document).ready(function () {
             },
             id: 2601
         };
-        if ( parseInt(max) > parseInt(min)) {
+        if (parseInt(max) > parseInt(min)) {
             $.ajax({
                     url: 'https://api.random.org/json-rpc/1/invoke',
                     type: "POST",
@@ -61,16 +61,35 @@ $(document).ready(function () {
         chartData.sort(function (a, b) {
             return a > b ? 1 : a < b ? -1 : 0;
         });
-        console.log('SortedData', chartData);
+        var returnedNumbers = [],
+            frequency = [],
+            prevElement;
+        //frequency of number 
+        function foo(chartData) {
+            for (var i = 0; i < chartData.length; i++) {
+                if (chartData[i] !== prevElement) {
+                    returnedNumbers.push(chartData[i]);
+                    frequency.push(1);
+                } else {
+                    frequency[frequency.length - 1]++;
+                }
+                prevElement = chartData[i];
+            }
 
+            return [returnedNumbers, frequency];
+        }
+
+        var result = foo(chartData);
+        console.log(returnedNumbers, frequency)
+        console.log('SortedData', result);
         var ctx = document.getElementById("myChart").getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: chartData,
+                labels: returnedNumbers,
                 datasets: [{
-                    label: 'Sorted random numbers',
-                    data: chartData,
+                    label: 'Number is repeated',
+                    data: frequency,
                     backgroundColor: 'teal',
                     borderColor: 'white',
                 }]
@@ -78,7 +97,16 @@ $(document).ready(function () {
             options: {
                 scales: {
                     yAxes: [{
+                        barPercentage: 1.0,
+                        categoryPercentage: 1.0,
+                        display: true,
+                        stacked: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: "Frequency"
+                        },
                         ticks: {
+                            min: 0,
                             beginAtZero: true
                         }
                     }]
